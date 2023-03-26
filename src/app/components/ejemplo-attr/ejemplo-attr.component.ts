@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./ejemplo-attr.component.scss']
 })
 export class EjemploAttrComponent {
-
+//color para subrayar los textos
+color: string = ''
 }
