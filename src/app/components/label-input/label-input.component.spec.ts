@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EjemploAttrComponent } from './ejemplo-attr.component';
+import { LabelInputComponent } from './label-input.component';
 
-describe('EjemploAttrComponent', () => {
-  let component: EjemploAttrComponent;
-  let fixture: ComponentFixture<EjemploAttrComponent>;
+describe('LabelInputComponent', () => {
+  let component: LabelInputComponent;
+  let fixture: ComponentFixture<LabelInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EjemploAttrComponent ]
+      declarations: [ LabelInputComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EjemploAttrComponent);
+    fixture = TestBed.createComponent(LabelInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
