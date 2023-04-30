@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-label-input',
@@ -13,25 +9,35 @@ import {
 })
 export class LabelInputComponent implements OnInit {
   formulario: FormGroup = new FormGroup({});
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private dataService:DataService) {}
 
   ngOnInit(): void {
     this.formulario = this.fb.group({
-      name: ['', Validators.required],
-      email: [''],
-      password: ['', Validators.required],
+      id: [''],
+      nombre: [''],
+      apellido: [''],
+      edad: [
+        ''
+
+      ],
     });
+
+  }
+  /**
+   * Agrega un objeto al array data
+   */
+  enviar() {
+    if (this.formulario.valid) {
+      const formData = {
+        id: this.formulario.get('id')?.value,
+        nombre: this.formulario.get('nombre')?.value,
+        apellido: this.formulario.get('apellido')?.value,
+        edad: this.formulario.get('edad')?.value,
+      };
+      this.dataService.addData(formData);
+      this.formulario.reset();
+    }
   }
 
-  get nombre(){
-    return this.formulario.get('name');
-  }
 
-  get email(){
-    return this.formulario.get('email');
-  }
-
-  get password(){
-    return this.formulario.get('password');
-  }
 }

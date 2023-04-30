@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let columna of columnas">{{ columna }}</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dato of datos">
+      <td *ngFor="let columna of columnas">{{ dato[columna] }}</td>
+      <td><button (click)="borrar(dato)">Borrar</button></td>
+    </tr>
+  </tbody>
+</table>

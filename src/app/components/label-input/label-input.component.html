@@ -1,19 +1,19 @@
-<form [formGroup]="formulario">
-  <h3>Formulario:</h3>
-  <!-- Datos en vivo del formulario -->
-  <p>{{ formulario.value | json }}</p>
-  <!--! NOMBRE -->
-
-  <input formControlName="name" label="Nombre" isRequired/>
-
-  <div *ngIf="nombre?.errors?.['required'] && nombre?.touched">
-    <p class="error">* El campo Nombre es obligatorio</p>
-  </div>
-  <!--! EMAIL -->
-
-  <input formControlName="email" label="Email" />
-
-  <!--! CONTRASEÑA -->
-  <label>Contraseña</label>
-  <input formControlName="password" label="Contraseña"   />
+<form [formGroup]="formulario" (ngSubmit)="enviar()">
+  <input type="text" id="id" formControlName="id" label="Id" isRequired />
+  <input
+    type="text"
+    id="nombre"
+    formControlName="nombre"
+    label="Nombre"
+    isRequired
+  />
+  <input
+    type="text"
+    id="apellido"
+    formControlName="apellido"
+    label="Apellido"
+    isRequired
+  />
+  <input type="text" id="edad" formControlName="edad" label="Edad" isRequired />
+  <button type="submit">Enviar</button>
 </form>

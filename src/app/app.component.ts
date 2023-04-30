@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'directivas-avanzadas';
+  datos: any[] = [];
+
+
+  agregarDatos(dato: any) {
+    this.datos.push(dato);
+  }
+
 }
