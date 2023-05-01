@@ -1,11 +1,12 @@
 <form [formGroup]="formulario" (ngSubmit)="enviar()">
-  <input type="text" id="id" formControlName="id" label="Id" isRequired />
+  <input type="text" id="id" formControlName="id" label="Id" isRequired  />
   <input
     type="text"
     id="nombre"
     formControlName="nombre"
     label="Nombre"
     isRequired
+    appErrorHandler
   />
   <input
     type="text"

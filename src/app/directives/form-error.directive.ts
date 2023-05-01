@@ -1,57 +1,41 @@
-import { Directive, ElementRef, HostListener, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Directive, Input, ElementRef } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 @Directive({
-  selector: '[tocado]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => formError),
-      multi: true
-    }
-  ]
+  selector: '[appErrorHandler]'
 })
-export class formError implements ControlValueAccessor {
+export class ErrorHandlerDirective {
+  @Input() appErrorHandler: string = '';
+  private control?: AbstractControl;
 
-  private onTouchedCallback: () => void = () => {};
+  constructor(private el: ElementRef) {}
 
-  constructor(private el: ElementRef) { }
+  ngOnInit(): void {
+    const span = document.createElement('span');
+    span.style.color = 'red';
+    span.style.display = 'none';
+    this.el.nativeElement.parentNode.appendChild(span);
 
-  writeValue(value: any) {
-    // No se necesita hacer nada en este método
+    this.control = this.el.nativeElement.form.get(this.appErrorHandler);
+
+    this.control?.valueChanges.subscribe(() => {
+      if (this.control?.invalid && this.control.touched) {
+        span.textContent = this.getErrorMessage();
+        span.style.display = 'block';
+      } else {
+        span.style.display = 'none';
+      }
+    });
   }
 
-  registerOnChange(fn: any) {
-    // No se necesita hacer nada en este método
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouchedCallback = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean) {
-    // No se necesita hacer nada en este método
-  }
-
-  @HostListener('blur')
-  onTouched() {
-    this.onTouchedCallback();
-    const inputValue = this.el.nativeElement.value;
-    if (!inputValue) {
-      const errorMessage = document.createElement('div');
-      errorMessage.innerHTML = 'Este campo es obligatorio.';
-      errorMessage.style.color = 'red';
-      errorMessage.style.marginTop = '5px'; // Agregamos un margen superior
-      this.el.nativeElement.parentNode.appendChild(errorMessage);
+  getErrorMessage() {
+    if (this.control?.hasError('required')) {
+      return 'Campo requerido';
     }
-  }
-
-  @HostListener('input')
-  onInputChange() {
-    const errorMessage = this.el.nativeElement.parentNode.querySelector('div');
-    if (errorMessage) {
-      errorMessage.remove();
+    if (this.control?.hasError('email')) {
+      return 'Ingrese un correo electrónico válido';
     }
+    // agregar otros casos de errores personalizados aquí
+    return '';
   }
-
 }
