@@ -15,5 +15,5 @@
     isRequired
   />
   <input type="text" id="edad" formControlName="edad" label="Edad" isRequired />
-  <button type="submit">Enviar</button>
+  <button type="submit" [disabled]="formulario.invalid">Enviar</button>
 </form>

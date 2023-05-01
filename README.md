@@ -12,9 +12,9 @@ Para utilizar la directiva, primero hay que agregar el paquete `@angular/core` a
 2. Agrega el archivo en la carpeta de directivas.
 3. Importa la directiva en tu módulo de Angular.
 
-```typescrip
-import { NgModule } from '@angular/core';****
-import { LabeledInputDirective } from './directivas/labeled-input.directive';
+```typescript
+import { NgModule } from '@angular/core';
+import { LabeledInputDirective } from './directives/labeled-input.directive';
 
 @NgModule({
   declarations: [

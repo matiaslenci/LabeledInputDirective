@@ -13,9 +13,9 @@ export class LabelInputComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.fb.group({
-      id: [''],
-      nombre: [''],
-      apellido: [''],
+      id: ['' , Validators.required],
+      nombre: ['', Validators.required],
+      apellido: ['' , Validators.required],
       edad: [
         ''
 
@@ -36,6 +36,7 @@ export class LabelInputComponent implements OnInit {
       };
       this.dataService.addData(formData);
       this.formulario.reset();
+
     }
   }
 
